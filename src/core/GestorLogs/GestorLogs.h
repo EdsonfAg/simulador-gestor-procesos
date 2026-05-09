@@ -4,11 +4,15 @@
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <iostream> // para imprimir en consola
 
 class GestorLogs {
 private:
     std::vector<std::string> logsRAM;
     std::vector<std::string> logsCPU;
+
+    // Nuevo método central
+    void anotarEvento(std::vector<std::string>& contenedor, const std::string& mensaje);
 
 public:
     GestorLogs();
