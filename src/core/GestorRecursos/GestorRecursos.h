@@ -10,12 +10,9 @@ class GestorRecursos {
 private:
     const uint32_t MAX_MEMORIA = 4096;
     const int MAX_CPUS = 1;
-
     uint32_t memoria_usada;
     int cpus_en_uso;
-
     std::map<uint32_t, uint32_t> mapa_memoria;
-
     GestorLogs* logs;
 
 public:
