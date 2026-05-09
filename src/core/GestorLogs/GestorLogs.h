@@ -12,7 +12,7 @@ private:
     std::vector<std::string> logsCPU;
 
     // ================= IMPRIMIR LOGS =================
-    void anotarEvento(std::vector<std::string>& contenedor, const std::string& mensaje);
+    static void anotarEvento(std::vector<std::string>& contenedor, const std::string& mensaje);
 
 public:
     GestorLogs();
