@@ -23,13 +23,11 @@ public:
     void reservarMemoria(uint32_t pid, uint32_t mb);
     uint32_t liberarMemoria(uint32_t pid);
     bool asignarMemoria(uint32_t pid, uint32_t mb);
+    uint32_t finalizarMemoria(uint32_t pid);
 
     // ================= CPU =================
     bool asignarCPU(uint32_t pid);
     void liberarCPU();
-
-    // ================= FINALIZAR =================
-    uint32_t finalizarMemoria(uint32_t pid);
     void finalizarCPU(uint32_t pid);
 
     // ================= GETTERS =================

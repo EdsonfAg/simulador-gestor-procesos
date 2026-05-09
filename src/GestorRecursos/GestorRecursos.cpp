@@ -5,12 +5,10 @@ GestorRecursos::GestorRecursos(GestorLogs* logs_instance) : memoria_usada(0), cp
 }
 
 // ================= MEMORIA =================
-
 bool GestorRecursos::validarDisponibilidadMemoria(uint32_t mb) const {
     if (logs) logs->logValidarDisponibilidadMemoria(mb);
     return (memoria_usada + mb <= MAX_MEMORIA);
 }
-
 void GestorRecursos::reservarMemoria(uint32_t pid, uint32_t mb) {
     if (validarDisponibilidadMemoria(mb)) {
         if (mapa_memoria.count(pid)) {
@@ -21,7 +19,6 @@ void GestorRecursos::reservarMemoria(uint32_t pid, uint32_t mb) {
         if (logs) logs->logReservarMemoria(pid, mb);
     }
 }
-
 uint32_t GestorRecursos::liberarMemoria(uint32_t pid) {
     if (mapa_memoria.find(pid) != mapa_memoria.end()) {
         uint32_t mb_liberados = mapa_memoria[pid];
@@ -32,7 +29,6 @@ uint32_t GestorRecursos::liberarMemoria(uint32_t pid) {
     }
     return 0;
 }
-
 bool GestorRecursos::asignarMemoria(uint32_t pid, uint32_t mb) {
     if (!validarDisponibilidadMemoria(mb)) {
         return false;
@@ -41,7 +37,10 @@ bool GestorRecursos::asignarMemoria(uint32_t pid, uint32_t mb) {
     if (logs) logs->logAsignarMemoria(pid, mb);
     return true;
 }
-
+uint32_t GestorRecursos::finalizarMemoria(uint32_t pid) {
+    if (logs) logs->logFinalizarMemoria(pid);
+    return liberarMemoria(pid);
+}
 // ================= CPU =================
 
 bool GestorRecursos::asignarCPU(uint32_t pid) {
@@ -52,26 +51,16 @@ bool GestorRecursos::asignarCPU(uint32_t pid) {
     }
     return false;
 }
-
 void GestorRecursos::liberarCPU() {
     if (cpus_en_uso > 0) {
         cpus_en_uso--;
         if (logs) logs->logLiberarCPU();
     }
 }
-
-// ================= FINALIZAR =================
-
-uint32_t GestorRecursos::finalizarMemoria(uint32_t pid) {
-    if (logs) logs->logFinalizarMemoria(pid);
-    return liberarMemoria(pid);
-}
-
 void GestorRecursos::finalizarCPU(uint32_t pid) {
     if (logs) logs->logFinalizarCPU(pid);
     liberarCPU();
 }
-
 // ================= GETTERS =================
 uint32_t GestorRecursos::obtenerMemoriaUsada() const {
     return memoria_usada;
