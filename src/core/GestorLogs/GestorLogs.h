@@ -11,11 +11,11 @@ private:
     std::vector<std::string> logsRAM;
     std::vector<std::string> logsCPU;
 
-    // ================= IMPRIMIR LOGS =================
-    static void anotarEvento(std::vector<std::string>& contenedor, const std::string& mensaje);
-
 public:
     GestorLogs();
+
+    // ================= IMPRIMIR LOGS =================
+    static void anotarEvento(std::vector<std::string>& contenedor, const std::string& mensaje);
 
     // ================= RAM =================
     void logValidarDisponibilidadMemoria(uint32_t mb);
