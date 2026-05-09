@@ -21,10 +21,6 @@ private:
 public:
     GestorRecursos(GestorLogs* logs_instance = nullptr);
 
-
-    //Getters para pruebas unitarias
-    uint32_t obtenerMemoriaUsada() const;
-
     // ================= MEMORIA =================
     bool validarDisponibilidadMemoria(uint32_t mb) const;
     void reservarMemoria(uint32_t pid, uint32_t mb);
@@ -32,14 +28,15 @@ public:
     bool asignarMemoria(uint32_t pid, uint32_t mb);
 
     // ================= CPU =================
-    bool asignarCPU(uint32_t pid); // Se agregó el pid para que coincida con el log
+    bool asignarCPU(uint32_t pid);
     void liberarCPU();
 
     // ================= FINALIZAR =================
     uint32_t finalizarMemoria(uint32_t pid);
-    void finalizarCPU();
+    void finalizarCPU(uint32_t pid);
 
-
+    // ================= GETTERS =================
+    uint32_t obtenerMemoriaUsada() const;
 };
 
 #endif // GESTOR_RECURSOS_H
