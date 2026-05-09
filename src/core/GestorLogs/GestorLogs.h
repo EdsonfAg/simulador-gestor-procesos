@@ -4,14 +4,14 @@
 #include <string>
 #include <vector>
 #include <cstdint>
-#include <iostream> // para imprimir en consola
+#include <iostream>
 
 class GestorLogs {
 private:
     std::vector<std::string> logsRAM;
     std::vector<std::string> logsCPU;
 
-    // Nuevo método central
+    // ================= IMPRIMIR LOGS =================
     void anotarEvento(std::vector<std::string>& contenedor, const std::string& mensaje);
 
 public:
@@ -26,6 +26,10 @@ public:
     // ================= CPU =================
     void logAsignarCPU(uint32_t pid);
     void logLiberarCPU();
+
+    // ================= FINALIZAR =================
+    void logFinalizarMemoria(uint32_t pid);
+    void logFinalizarCPU(uint32_t pid);
 
     // ================= EXPORTAR  =================
     std::vector<std::string> exportarLogsRAM() const;

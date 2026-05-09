@@ -4,7 +4,7 @@
 GestorLogs::GestorLogs() {
 }
 
-// ================= MÉTODO CENTRAL =================
+// ================= IMPRIMIR LOGS =================
 
 void GestorLogs::anotarEvento(std::vector<std::string>& contenedor, const std::string& mensaje) {
     contenedor.push_back(mensaje);
@@ -40,6 +40,16 @@ void GestorLogs::logAsignarCPU(uint32_t pid) {
 
 void GestorLogs::logLiberarCPU() {
     anotarEvento(logsCPU, "CPU liberada");
+}
+
+// ================= FINALIZAR =================
+
+void GestorLogs::logFinalizarMemoria(uint32_t pid) {
+    anotarEvento(logsRAM, "PID " + std::to_string(pid) + " finaliza memoria");
+}
+
+void GestorLogs::logFinalizarCPU(uint32_t pid) {
+    anotarEvento(logsCPU, "CPU finalizada por PID " + std::to_string(pid));
 }
 
 // ================= EXPORTAR =================
