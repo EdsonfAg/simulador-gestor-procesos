@@ -8,7 +8,7 @@
 
 class GestorLogs {
 private:
-    std::vector<std::string> logsMemoria;
+    std::vector<std::string> logsRAM;
     std::vector<std::string> logsCPU;
     std::vector<std::string> historialLogs;
 
@@ -22,7 +22,7 @@ public:
     std::vector<std::string> exportarHistorialLogs() const;
 
     // ================= RAM =================
-    std::vector<std::string> exportarLogsMemoria();
+    std::vector<std::string> exportarLogsRAM();
     void logValidarDisponibilidadMemoria(uint32_t mb);
     void logReservarMemoria(uint32_t pid, uint32_t mb);
     void logAsignarMemoria(uint32_t pid, uint32_t mb);

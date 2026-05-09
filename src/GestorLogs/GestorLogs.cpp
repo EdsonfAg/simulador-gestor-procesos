@@ -1,6 +1,6 @@
 #include "../core/GestorLogs/GestorLogs.h"
 
-// Constructor
+// ================= CONSTRUCTOR =================
 GestorLogs::GestorLogs() {
 }
 
@@ -17,38 +17,45 @@ std::vector<std::string> GestorLogs::exportarHistorialLogs() const {
 
 // ================= RAM =================
 void GestorLogs::logValidarDisponibilidadMemoria(uint32_t mb) {
-    anotarEvento(logsMemoria, "Validando " + std::to_string(mb) + " MB de RAM");
+    anotarEvento(logsRAM, "Validando " + std::to_string(mb) + " MB de RAM");
 }
+
 void GestorLogs::logReservarMemoria(uint32_t pid, uint32_t mb) {
-    anotarEvento(logsMemoria, "PID " + std::to_string(pid) +
+    anotarEvento(logsRAM, "PID " + std::to_string(pid) +
                           " reserva " + std::to_string(mb) + " MB");
 }
+
 void GestorLogs::logAsignarMemoria(uint32_t pid, uint32_t mb) {
-    anotarEvento(logsMemoria, "PID " + std::to_string(pid) +
+    anotarEvento(logsRAM, "PID " + std::to_string(pid) +
                           " asigna " + std::to_string(mb) + " MB");
 }
 void GestorLogs::logLiberarMemoria(uint32_t pid, uint32_t mb) {
-    anotarEvento(logsMemoria, "PID " + std::to_string(pid) +
+    anotarEvento(logsRAM, "PID " + std::to_string(pid) +
                           " libera " + std::to_string(mb) + " MB");
 }
+
 void GestorLogs::logFinalizarMemoria(uint32_t pid) {
-    anotarEvento(logsMemoria, "PID " + std::to_string(pid) + " finaliza memoria");
+    anotarEvento(logsRAM, "PID " + std::to_string(pid) + " finaliza memoria");
 }
-std::vector<std::string> GestorLogs::exportarLogsMemoria() {
-    historialLogs.insert(historialLogs.end(), logsMemoria.begin(), logsMemoria.end());
-    return logsMemoria;
+
+std::vector<std::string> GestorLogs::exportarLogsRAM() {
+    historialLogs.insert(historialLogs.end(), logsRAM.begin(), logsRAM.end());
+    return logsRAM;
 }
 
 // ================= CPU =================
 void GestorLogs::logAsignarCPU(uint32_t pid) {
     anotarEvento(logsCPU, "CPU asignada al PID " + std::to_string(pid));
 }
+
 void GestorLogs::logLiberarCPU() {
     anotarEvento(logsCPU, "CPU liberada");
 }
+
 void GestorLogs::logFinalizarCPU(uint32_t pid) {
     anotarEvento(logsCPU, "CPU finalizada por PID " + std::to_string(pid));
 }
+
 std::vector<std::string> GestorLogs::exportarLogsCPU() {
     historialLogs.insert(historialLogs.end(), logsCPU.begin(), logsCPU.end());
     return logsCPU;
