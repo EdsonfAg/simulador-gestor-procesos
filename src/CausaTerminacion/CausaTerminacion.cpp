@@ -1,63 +1,100 @@
-/*
-//#include "../core/CausaTerminacion/CausaTerminacion.h"
+#include "../core/CausaTerminacion/CausaTerminacion.h"
 
-//std::string CausaTerminacionManager::obtenerDescripcion(CausaTerminacion causa) {
+// Constructor
+CausaTerminacion::CausaTerminacion(TipoTerminacion tipo,
+                                   ModuloFallo modulo,
+                                   DetalleFallo detalle)
+    : tipo(tipo), modulo(modulo), detalle(detalle) {}
 
-    //switch (causa) {
+// Getters
+TipoTerminacion CausaTerminacion::getTipo() const {
+    return tipo;
+}
 
-        // ================= NORMAL =================
+ModuloFallo CausaTerminacion::getModulo() const {
+    return modulo;
+}
 
-        //case CausaTerminacion::NORMAL:
-            //return "Proceso finalizado correctamente.";
+DetalleFallo CausaTerminacion::getDetalle() const {
+    return detalle;
+}
 
-            // ================= RAM =================
+// ================= DESCRIPCION =================
+std::string CausaTerminacion::obtenerDescripcion() const {
 
-        //case CausaTerminacion::MEMORIA_INSUFICIENTE_FAKE:
-            //return "Fallo artificial: memoria insuficiente durante asignacion.";
+    switch (tipo) {
 
-        //case CausaTerminacion::FRAGMENTACION_FAKE:
-            //return "Fallo artificial: fragmentacion de memoria detectada.";
+        case TipoTerminacion::NORMAL:
+            return "Proceso finalizado correctamente.";
 
-            // ================= CPU =================
+        case TipoTerminacion::USUARIO:
+            return "Proceso terminado por el usuario.";
 
-        //case CausaTerminacion::CPU_SATURADA_FAKE:
-            //return "Fallo artificial: CPU saturada temporalmente.";
+        case TipoTerminacion::INTERBLOQUEO:
+            return "Proceso detenido por interbloqueo.";
 
-        //case CausaTerminacion::QUANTUM_AGOTADO_FAKE:
-            //return "Fallo artificial: quantum de CPU agotado.";
+        case TipoTerminacion::ERROR:
+            switch (detalle) {
 
-        //default:
-            //return "Causa desconocida.";
-    //}
-//}
+                // RAM
+                case DetalleFallo::MEMORIA_INSUFICIENTE_FAKE:
+                    return "Error: memoria insuficiente durante la ejecucion.";
 
-//std::string CausaTerminacionManager::obtenerSolucion(CausaTerminacion causa) {
+                case DetalleFallo::FRAGMENTACION_FAKE:
+                    return "Error: fragmentacion de memoria detectada.";
 
-    //switch (causa) {
+                // CPU
+                case DetalleFallo::CPU_SATURADA_FAKE:
+                    return "Error: CPU saturada.";
 
-        // ================= NORMAL =================
+                case DetalleFallo::QUANTUM_AGOTADO_FAKE:
+                    return "Error: quantum de CPU agotado.";
 
-        //case CausaTerminacion::NORMAL:
-            //return "No se requiere reparacion.";
-
-            // ================= RAM =================
-
-        //case CausaTerminacion::MEMORIA_INSUFICIENTE_FAKE:
-            return "Liberando memoria temporal y reintentando asignacion.";
-
-        case CausaTerminacion::FRAGMENTACION_FAKE:
-            return "Compactando memoria y reorganizando bloques.";
-
-            // ================= CPU =================
-
-        case CausaTerminacion::CPU_SATURADA_FAKE:
-            return "Esperando liberacion de CPU y reintentando.";
-
-        case CausaTerminacion::QUANTUM_AGOTADO_FAKE:
-            return "Reasignando quantum y devolviendo proceso a cola.";
+                default:
+                    return "Error desconocido.";
+            }
 
         default:
-            return "Sin solucion definida.";
+            return "Causa desconocida.";
     }
 }
-*/
+
+// ================= SOLUCION =================
+std::string CausaTerminacion::obtenerSolucion() const {
+
+    switch (tipo) {
+
+        case TipoTerminacion::NORMAL:
+            return "No se requiere accion.";
+
+        case TipoTerminacion::USUARIO:
+            return "No se requiere accion adicional.";
+
+        case TipoTerminacion::INTERBLOQUEO:
+            return "Revisar recursos compartidos y evitar ciclos de espera.";
+
+        case TipoTerminacion::ERROR:
+            switch (detalle) {
+
+                // RAM
+                case DetalleFallo::MEMORIA_INSUFICIENTE_FAKE:
+                    return "Liberar memoria y reintentar.";
+
+                case DetalleFallo::FRAGMENTACION_FAKE:
+                    return "Compactar memoria.";
+
+                // CPU
+                case DetalleFallo::CPU_SATURADA_FAKE:
+                    return "Esperar liberacion de CPU.";
+
+                case DetalleFallo::QUANTUM_AGOTADO_FAKE:
+                    return "Reasignar quantum.";
+
+                default:
+                    return "No hay solucion definida.";
+            }
+
+        default:
+            return "Sin solucion.";
+    }
+}

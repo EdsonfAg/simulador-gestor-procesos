@@ -19,5 +19,10 @@ add_executable(simulador
         src/CausaTerminacion/CausaTerminacion.cpp
         src/core/CausaTerminacion/CausaTerminacion.h
         src/GestorRecursos/GestorRecursos.cpp
+        src/MotorSimulacion/MotorSimulacion.cpp
+        src/core/MotorSimulacion/MotorSimulacion.h
+        src/core/Planificador/Planificador.h
+        src/Planificador/Planificador.cpp
+        src/MotorSimulacion/MotorSimulacion.cpp
 
 )

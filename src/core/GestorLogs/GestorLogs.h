@@ -24,17 +24,13 @@ public:
     // ================= RAM =================
     std::vector<std::string> exportarLogsRAM();
     void logValidarDisponibilidadMemoria(uint32_t mb);
-    void logReservarMemoria(uint32_t pid, uint32_t mb);
     void logAsignarMemoria(uint32_t pid, uint32_t mb);
     void logLiberarMemoria(uint32_t pid, uint32_t mb);
-    void logFinalizarMemoria(uint32_t pid);
 
     // ================= CPU =================
     std::vector<std::string> exportarLogsCPU();
     void logAsignarCPU(uint32_t pid);
     void logLiberarCPU();
-    void logFinalizarCPU(uint32_t pid);
-
 };
 
 #endif
